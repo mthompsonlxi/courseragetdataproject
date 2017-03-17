@@ -60,7 +60,9 @@ colnames(filtdata) <- varNames
 
 #' Setup subjects and activity as factors
 filtdata$subject <- as.factor(filtdata$subject)
-filtdata$activityName <- as.factor(filtdata$activityName)
+filtdata$activityName <- factor(filtdata$activityName, 
+                                levels = activity$id, 
+                                labels = activity$activityName)
 
 #' Remove unneeded objects
 
