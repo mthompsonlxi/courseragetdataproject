@@ -67,3 +67,13 @@ filtdata$activityName <- factor(filtdata$activityName,
 #' Remove unneeded objects
 
 rm(activity, features, varNames)
+
+#' ###### Create tidy data file
+#' 
+#' 
+library(reshape2)
+
+filtdata <- melt(filtdata, id = c("subject", "activityName"))
+tidydata <- dcast(filtdata, subject + activityName ~ variable, mean)
+
+write.table(tidydata, "tidy.txt", row.names = FALSE, quote = FALSE)
