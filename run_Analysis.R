@@ -43,7 +43,7 @@ filtdata <- rbind(tst_data, trn_data)
 
 rm(tst_data, trn_data)
 
-#' ###### Set Activity Names
+#' ###### Set dataframe structure
 #' 
 #' Clean up the names of the Activity values
 
@@ -53,9 +53,15 @@ activity$V2 <- tolower(activity$V2)
 activity$V2 <- gsub("_", "", activity$V2)
 colnames(activity) <- c("id","activityName")
 
-#' ###### Set Variable Names
-#' 
-#' 
+#' Setup Variable Names
 
 varNames <- c("subject", "activityName", features$variableName)
 colnames(filtdata) <- varNames
+
+#' Setup subjects and activity as factors
+filtdata$subject <- as.factor(filtdata$subject)
+filtdata$activityName <- as.factor(filtdata$activityName)
+
+#' Remove unneeded objects
+
+rm(activity, features, varNames)
